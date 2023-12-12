@@ -15,7 +15,9 @@ import com.murray.account.ui.userlist.usecase.UserListViewModel
 import com.murray.entities.accounts.User
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.murray.account.R
+import com.murray.invoice.MainActivity
 
 class UserListFragment : Fragment(), UserAdapter.OnUserClick {
 
@@ -39,6 +41,8 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUpFab()
+        setUpToolbar()
         setUpUserRecycler()
 
         viewmodel.getState().observe(viewLifecycleOwner, Observer{
@@ -48,7 +52,40 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
                 is UserListState.Success -> onSuccess(it.dataset)
             }
         })
+
     }
+
+    /**
+     * Esta función personaliza el comportamiento del botón flotante de la Activity
+     */
+    private fun setUpFab(){
+        //Apply significa la inicialización del objeto fab
+        val fab = (requireActivity() as? MainActivity)?.fab?.apply {
+            visibility = View.VISIBLE
+            setOnClickListener { view ->
+                //Aquí la acción del listener
+                Snackbar.make(view, "Soy el Fragment", Snackbar.LENGTH_LONG).show()
+            }
+        }
+
+        /*
+        val fab = (requireActivity() as? MainActivity)?.fab
+        fab?.visibility = View.VISIBLE
+        fab?.setOnClickListener { view ->
+            //Aquí la acción del listener
+            Snackbar.make(view, "Soy el Fragment", Snackbar.LENGTH_LONG).show()
+        }*/
+
+    }
+
+    /**
+     * Esta función personaliza el comportamiento de la Toolbar
+     */
+    private fun setUpToolbar(){
+        //Modismo Apply de Kotlin
+    }
+
+
     override fun onStart() {
         super.onStart()
         viewmodel.getUserList()
