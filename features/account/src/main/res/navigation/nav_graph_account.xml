@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/nav_graph_account"
+    app:startDestination="@id/accountSignInFragment">
+
+    <fragment
+        android:id="@+id/accountSignInFragment"
+        android:name="com.murray.account.ui.signin.AccountSignInFragment"
+        android:label="@string/title_accountsigin"
+        tools:layout="@layout/fragment_account_sign_in" >
+        <action
+            android:id="@+id/action_accountSignInFragment_to_accountSignUpFragment"
+            app:destination="@id/accountSignUpFragment" />
+        <action
+            android:id="@+id/action_accountSignInFragment_to_userListFragment"
+            app:destination="@id/userListFragment" />
+        <action
+            android:id="@+id/action_accountSignInFragment_to_baseFragmentDialog"
+            app:destination="@id/baseFragmentDialog" />
+        <action
+            android:id="@+id/action_accountSignInFragment_to_fragmentProgressDialog"
+            app:destination="@id/fragmentProgressDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountSignUpFragment"
+        android:name="com.murray.account.ui.signup.AccountSignUpFragment"
+        android:label="@string/title_accountsignup" />
+    <fragment
+        android:id="@+id/userListFragment"
+        android:name="com.murray.account.ui.userlist.UserListFragment"
+        android:label="@string/title_userlist"
+        tools:layout="@layout/fragment_user_list" >
+        <action
+            android:id="@+id/action_userListFragment_to_fragmentProgressDialog"
+            app:destination="@id/fragmentProgressDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/baseFragmentDialog"
+        android:name="com.murray.invoice.base.BaseFragmentDialog"
+        android:label="BaseFragmentDialog" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="message"
+            app:argType="string" />
+    </dialog>
+    <dialog
+        android:id="@+id/fragmentProgressDialog"
+        android:name="com.murray.invoice.base.FragmentProgressDialog"
+        android:label="FragmentProgressDialog" />
+
+</navigation>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="itemcreationviewmodel"
+            type="com.murray.item.ui.itemcreation.usecase.ItemCreationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.murray.item.ui.itemcreation.ItemCreationFragment">
+
+        <!--Input-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilItemCreationName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:errorEnabled="true"
+            app:layout_constraintBottom_toTopOf="@+id/tilItemCreationRate"
+            app:layout_constraintEnd_toStartOf="@+id/gItemCreationEnd"
+            app:layout_constraintStart_toStartOf="@+id/gItemCreationStart"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tietItemCreationName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiet_item_creation_name"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@={itemcreationviewmodel.name}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilItemCreationRate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:errorEnabled="true"
+            app:layout_constraintBottom_toTopOf="@+id/tilItemCreationType"
+            app:layout_constraintEnd_toStartOf="@+id/cbItemCreationTax"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintHorizontal_weight="5"
+            app:layout_constraintStart_toStartOf="@+id/gItemCreationStart"
+            app:layout_constraintTop_toBottomOf="@+id/tilItemCreationName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tietItemCreationRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0123456789."
+                android:hint="@string/tiet_item_creation_rate"
+                android:inputType="numberDecimal"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@={itemcreationviewmodel.rate}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/cbItemCreationTax"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:checked="@={itemcreationviewmodel.isTaxable}"
+            android:text="@string/tiet_item_creation_tax"
+            app:layout_constraintBottom_toTopOf="@+id/tilItemCreationType"
+            app:layout_constraintEnd_toStartOf="@+id/gItemCreationEnd"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toEndOf="@+id/tilItemCreationRate"
+            app:layout_constraintTop_toBottomOf="@+id/tilItemCreationName" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilItemCreationType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/tilItemCreationDescr"
+            app:layout_constraintEnd_toStartOf="@+id/gItemCreationEnd"
+            app:layout_constraintStart_toStartOf="@+id/gItemCreationStart"
+            app:layout_constraintTop_toBottomOf="@+id/tilItemCreationRate">
+
+            <TextView
+                android:id="@+id/tvItemCreationType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:text="@string/tiet_item_creation_type"
+                android:textSize="20sp" />
+            <Spinner
+                android:id="@+id/sItemCreationType"
+                style="@android:style/Widget.Holo.Light.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/sp_item_creation_type"
+                android:hint="@string/tiet_item_creation_type"
+                android:padding="15dp"
+                android:selectedItemPosition="@={itemcreationviewmodel.typeSpinnerPosition}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilItemCreationDescr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/bItemCreationAddItem"
+            app:layout_constraintEnd_toStartOf="@+id/gItemCreationEnd"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/gItemCreationStart"
+            app:layout_constraintTop_toBottomOf="@+id/tilItemCreationType">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tietItemCreationDescr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|start"
+                android:hint="@string/tiet_item_creation_descr"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:maxLines="5"
+                android:text="@={itemcreationviewmodel.description}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--Button-->
+        <Button
+            android:id="@+id/bItemCreationAddItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:onClick="@{()->itemcreationviewmodel.validateItemCreation()}"
+            android:text="@string/b_item_creation_add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/gItemCreationEnd"
+            app:layout_constraintStart_toStartOf="@+id/gItemCreationStart"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <!--Helpers-->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gItemCreationStart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gItemCreationEnd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <ImageView
+            android:id="@+id/ivAddImage"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:background="@drawable/shape_item_img"
+            android:clipToOutline="true"
+            android:elevation="8dp"
+            android:src="@drawable/ic_addphoto"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.8"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

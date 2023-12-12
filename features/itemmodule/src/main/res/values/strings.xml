@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tv_item_list_empty_title">Sin artículos</string>
+    <string name="tv_item_list_empty_text">Toca el boton &quot;+&quot; para crear un nuevo artículo</string>
+
+    <string name="tiet_item_creation_name">Nombre</string>
+    <string name="tiet_item_creation_rate">Precio</string>
+    <string name="tiet_item_creation_tax">¿Impuesto?</string>
+    <string name="tiet_item_creation_type">Tipo</string>
+    <string name="tiet_item_creation_descr">Descripción</string>
+    <string name="b_item_creation_add">Añadir</string>
+
+    <string name="tiet_item_detail_name">Nombre</string>
+    <string name="tiet_item_detail_rate">Precio</string>
+    <string name="tiet_item_detail_tax">¿Impuesto?</string>
+    <string name="tiet_item_detail_type">Tipo</string>
+    <string name="tiet_item_detail_descr">Descripción</string>
+    <string name="b_item_detail_edit">Editar</string>
+
+    <string name="fragment_item_list_label">Lista de artículos</string>
+    <string name="fragment_item_creation_label">Crear artículo</string>
+    <string name="fragment_item_detail_label">Detalles del artículo</string>
+
+    <string name="true_string">Sí</string>
+    <string name="false_string">No</string>
+    <string name="product_string">Producto</string>
+    <string name="service_string">Servicio</string>
+</resources>

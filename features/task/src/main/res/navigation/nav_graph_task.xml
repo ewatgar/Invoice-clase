@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/nav_graph_task"
+    app:startDestination="@id/taskListFragment">
+
+    <fragment
+        android:id="@+id/taskListFragment"
+        android:name="com.murray.task.ui.TaskListFragment"
+        android:label="@string/lista_de_tareas"
+        tools:layout="@layout/fragment_task_list" >
+        <action
+            android:id="@+id/action_taskListFragment_to_taskCreationFragment"
+            app:destination="@id/taskCreationFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_fragmentProgressDialog"
+            app:destination="@id/fragmentProgressDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskCreationFragment"
+        android:name="com.murray.task.ui.TaskCreationFragment"
+        android:label="@string/creacion_de_tarea"
+        tools:layout="@layout/fragment_task_creation" />
+    <fragment
+        android:id="@+id/taskDetailFragment"
+        android:name="com.murray.task.ui.TaskDetailFragment"
+        android:label="@string/detalle_de_tarea"
+        tools:layout="@layout/fragment_task_detail" >
+        <action
+            android:id="@+id/action_taskDetailFragment_to_taskCreationFragment"
+            app:destination="@id/taskCreationFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/fragmentProgressDialog"
+        android:name="com.murray.invoice.base.FragmentProgressDialog"
+        android:label="FragmentProgressDialog" />
+</navigation>
