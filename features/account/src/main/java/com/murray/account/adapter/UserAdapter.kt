@@ -38,10 +38,17 @@ class UserAdapter(
 
     fun update(newDataSet: ArrayList<User>) {
         //Actualizar mi dataset y notificar a la vista el cambio
-
         dataset = newDataSet
-
         notifyDataSetChanged()
+    }
+
+    /**
+     * Función que ordena el dataset en base a una propiedad personalizada
+     */
+    fun sort() {
+        //Orden personalizado se establece mediante una propiedad
+        dataset.sortBy { it.email }
+        notifyDataSetChanged() //Se debe notificar el cambio
     }
 
     inner class UserViewHolder(private val binding: LayoutUserItemBinding) :

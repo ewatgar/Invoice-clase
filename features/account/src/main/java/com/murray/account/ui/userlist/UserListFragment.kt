@@ -3,10 +3,16 @@ package com.murray.account.ui.userlist
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.murray.account.adapter.UserAdapter
 import com.murray.account.databinding.FragmentUserListBinding
@@ -19,7 +25,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.murray.account.R
 import com.murray.invoice.MainActivity
 
-class UserListFragment : Fragment(), UserAdapter.OnUserClick {
+class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
 
     private var _binding: FragmentUserListBinding? = null
     private val binding get() = _binding!!
@@ -60,7 +66,7 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
      */
     private fun setUpFab(){
         //Apply significa la inicialización del objeto fab
-        val fab = (requireActivity() as? MainActivity)?.fab?.apply {
+        (requireActivity() as? MainActivity)?.fab?.apply {
             visibility = View.VISIBLE
             setOnClickListener { view ->
                 //Aquí la acción del listener
@@ -83,8 +89,35 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
      */
     private fun setUpToolbar(){
         //Modismo Apply de Kotlin
+        (requireActivity() as? MainActivity)?.toolbar?.apply {
+            visibility = View.VISIBLE
+        }
+        val menuhost: MenuHost = requireActivity()
+        //sustituye al sethostoptionmenu
+        menuhost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
     }
 
+    /**
+     * Se añade las opciones del menú definidas en R.menu.menu_list_user al menú principal
+     */
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu_list_user, menu)
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId){
+            R.id.action_sort -> {
+                userAdapter.sort()
+                return true
+            }
+            R.id.action_refresh -> {
+                viewmodel.getUserList()
+                return true
+            }
+            else -> false
+        }
+    }
 
     override fun onStart() {
         super.onStart()
@@ -134,5 +167,6 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
     override fun userOnLongClick(user: User) {
         Toast.makeText(requireActivity(), "Pulsacion larga en el usuario $user", Toast.LENGTH_SHORT).show()
     }
+
 
 }

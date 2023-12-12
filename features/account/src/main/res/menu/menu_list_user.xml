@@ -4,16 +4,17 @@
 
 
     <item
+        android:id="@+id/action_refresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/ic_action_refresh"
         android:title="Item"
-        app:showAsAction="always"
-        />
+        app:showAsAction="always"/>
     <item
+        android:id="@+id/action_sort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:icon="@drawable/ic_action_order"
+        android:icon="@drawable/ic_action_sort"
         android:title="Item"
         app:showAsAction="always"/>
 </menu>
