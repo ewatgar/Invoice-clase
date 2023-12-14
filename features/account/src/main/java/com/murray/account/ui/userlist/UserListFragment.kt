@@ -24,6 +24,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.murray.account.R
 import com.murray.invoice.MainActivity
+import java.util.Collections
 
 class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
 
@@ -108,7 +109,7 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId){
             R.id.action_sort -> {
-                userAdapter.sort()
+                userAdapter.sort() //sort orden PERSONALIZADO
                 return true
             }
             R.id.action_refresh -> {

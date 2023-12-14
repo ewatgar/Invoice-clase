@@ -8,6 +8,7 @@ import com.murray.entities.accounts.User
 import com.murray.network.ResourceList
 import com.murray.repositories.UserRepository
 import kotlinx.coroutines.launch
+import java.util.Collections
 
 class UserListViewModel : ViewModel() {
 
@@ -25,9 +26,14 @@ class UserListViewModel : ViewModel() {
             val result = UserRepository.getUserList()
             state.value = UserListState.Loading(false)
 
-
             when (result) {
-                is ResourceList.Success<*> -> state.value = UserListState.Success(result.data as ArrayList<User>)
+                is ResourceList.Success<*> ->
+                {
+                    var dataset = result.data as ArrayList<User>
+                    //Collections.sort(dataset) Java
+                    dataset.sort() //Kotlin orden NATURAL
+                    state.value = UserListState.Success(dataset)
+                }
 
                 is ResourceList.Error -> state.value = UserListState.NoDataError
             }
