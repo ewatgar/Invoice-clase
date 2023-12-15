@@ -67,6 +67,9 @@ class AccountSignUpFragment : Fragment() {
         twatcher = LogInTextWatcher(binding.tieConfirmsPasswordsSignUp)
         binding.tilConfirmsPasswordsSignUp.addTextChangedListener(twatcher)
 
+        viewmodel.typeAccount.value = binding.spType.selectedItem as TypeAccounts
+        viewmodel.visibilityAccount.value = binding.spVisibility.selectedItem as VisibilityAccounts
+
         viewmodel.getState().observe(viewLifecycleOwner, Observer {
             when (it) {
                 SignUpState.EmailEmptyError -> setEmailEmptyError()
