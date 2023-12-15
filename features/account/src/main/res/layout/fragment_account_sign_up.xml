@@ -40,7 +40,7 @@
                 android:id="@+id/tilEmailSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewmodel.userSignUp.email}"
+                android:text="@={viewmodel.email}"
                 android:hint="E-mail" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -56,7 +56,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tilPasswordSignUp"
-                android:text="@={viewmodel.userSignUp.password}"
+                android:text="@={viewmodel.password}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Contraseña" />

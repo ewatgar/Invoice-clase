@@ -22,8 +22,6 @@ class SignUpViewModel : ViewModel() {
     var typeAccount = MutableLiveData<TypeAccounts>()
     var visibilityAccount = MutableLiveData<VisibilityAccounts>()
 
-    var userSignUp = MutableLiveData<UserSignUp>()
-
     var state = MutableLiveData<SignUpState>()
 
     fun validateCredentials() {
@@ -37,7 +35,7 @@ class SignUpViewModel : ViewModel() {
 
             else -> {
                 //1 añadimos el usuario al repositorio con corrutina
-                UserSignInRepository.addUserSignUp(UserSignUp(email,))
+                UserSignInRepository.addUserSignUp(UserSignUp(password,))
                 //corrutina
                 viewModelScope.launch {
                     //verificar si email está duplicado
