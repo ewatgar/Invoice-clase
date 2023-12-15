@@ -147,26 +147,11 @@ class AccountSignUpFragment : Fragment() {
 
     private fun onSuccess() {
         Toast.makeText(requireActivity(), "Te has registrado", Toast.LENGTH_SHORT).show()
-        with(binding) {
-            val email: String = viewmodel!!.email.value!!
-            val password: String = viewmodel!!.password.value!!
-            val typeAccount: TypeAccounts = spType.selectedItem as TypeAccounts
-            val visibilityAccount: VisibilityAccounts =
-                spVisibility.selectedItem as VisibilityAccounts
+        viewmodel.typeAccount.value = binding.spType.selectedItem as TypeAccounts
+        viewmodel.visibilityAccount.value = binding.spVisibility.selectedItem as VisibilityAccounts
 
-            /*
-            viewmodel.addUserSignUp(
-                UserSignUp(
-                    password,
-                    typeAccount,
-                    visibilityAccount,
-                    "Name",
-                    "Surname",
-                    email
-                )
-            )*/
-        }
-        Toast.makeText(requireContext(), "Se ha registrado nueva cuenta", Toast.LENGTH_SHORT).show()
+        //addUserSignUp
+        Toast.makeText(requireContext(), "Se ha registrado una nueva cuenta", Toast.LENGTH_SHORT).show()
 
         findNavController().popBackStack()
     }

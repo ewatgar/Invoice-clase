@@ -35,12 +35,10 @@ class SignUpViewModel : ViewModel() {
 
             else -> {
                 //1 añadimos el usuario al repositorio con corrutina
-                UserSignInRepository.addUserSignUp(UserSignUp(password,))
                 //corrutina
                 viewModelScope.launch {
-                    //verificar si email está duplicado
-
-                    UserSignInRepository.register()
+                    val userSignUp = UserSignUp()
+                    val result = UserSignInRepository.register()
 
 
                 }

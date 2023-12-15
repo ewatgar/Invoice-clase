@@ -51,7 +51,6 @@ class UserSignInRepository private constructor() {
                 }
             }
             return resource
-
         }
 
         fun checkDuplicatedEmail(checkEmail: String): Boolean {
