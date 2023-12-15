@@ -7,7 +7,7 @@ import com.murray.network.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class UserSignInRepository private constructor() {
+class UserSignUpRepository private constructor() {
 
 
     companion object {
@@ -47,6 +47,8 @@ class UserSignInRepository private constructor() {
                     resource = Resource.Error(Exception("Email duplicado"))
                 } else {
                     //crear y añadir database aqui?
+
+                    addUserSignUp(userSignUp)
                     resource = Resource.Success(userSignUp)
                 }
             }

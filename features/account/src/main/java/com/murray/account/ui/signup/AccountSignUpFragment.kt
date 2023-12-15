@@ -47,8 +47,7 @@ class AccountSignUpFragment : Fragment() {
         _binding = FragmentAccountSignUpBinding.inflate(inflater, container, false)
 
         binding.viewmodel = this.viewmodel
-
-
+        
         binding.lifecycleOwner = this
         return binding.root
     }

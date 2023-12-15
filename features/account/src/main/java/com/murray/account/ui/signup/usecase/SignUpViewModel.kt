@@ -1,7 +1,5 @@
 package com.murray.account.ui.signup.usecase
 
-import android.icu.text.SimpleDateFormat
-import android.net.ParseException
 import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,9 +9,8 @@ import com.murray.entities.accounts.TypeAccounts
 import com.murray.entities.accounts.UserSignUp
 import com.murray.entities.accounts.VisibilityAccounts
 import com.murray.network.Resource
-import com.murray.repositories.UserSignInRepository
+import com.murray.repositories.UserSignUpRepository
 import kotlinx.coroutines.launch
-import java.util.Locale
 
 class SignUpViewModel : ViewModel() {
 
@@ -46,7 +43,7 @@ class SignUpViewModel : ViewModel() {
                         "Surname",
                         email.value!!
                     )
-                    val result = UserSignInRepository.register(userSignUp)
+                    val result = UserSignUpRepository.register(userSignUp)
 
                     when(result){
                         is Resource.Error -> state.value = SignUpState.EmailDuplicatedError
