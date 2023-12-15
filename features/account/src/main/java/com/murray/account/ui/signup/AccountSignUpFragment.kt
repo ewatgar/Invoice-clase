@@ -74,7 +74,7 @@ class AccountSignUpFragment : Fragment() {
                 SignUpState.PasswordEmptyError -> setPasswordEmptyError()
                 SignUpState.PasswordEmptyError2 -> setPasswordEmptyError2()
                 SignUpState.PasswordsNotEquals -> setDifferentPasswordError()
-                //SignUpState.Completed -> {}
+                SignUpState.EmailDuplicatedError -> setEmailDuplicatorError()
                 else -> onSuccess()
             }
         })
@@ -145,14 +145,13 @@ class AccountSignUpFragment : Fragment() {
         binding.tieConfirmsPasswordsSignUp.requestFocus()
     }
 
+    private fun setEmailDuplicatorError() {
+        Toast.makeText(requireActivity(), "Ya existe un usuario con ese email", Toast.LENGTH_SHORT).show()
+    }
+
     private fun onSuccess() {
-        Toast.makeText(requireActivity(), "Te has registrado", Toast.LENGTH_SHORT).show()
-        viewmodel.typeAccount.value = binding.spType.selectedItem as TypeAccounts
-        viewmodel.visibilityAccount.value = binding.spVisibility.selectedItem as VisibilityAccounts
-
-        //addUserSignUp
-        Toast.makeText(requireContext(), "Se ha registrado una nueva cuenta", Toast.LENGTH_SHORT).show()
-
+        Toast.makeText(requireContext(), "Se ha registrado una nueva cuenta", Toast.LENGTH_SHORT)
+            .show()
         findNavController().popBackStack()
     }
 

@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.murray.entities.accounts.TypeAccounts
 import com.murray.entities.accounts.UserSignUp
 import com.murray.entities.accounts.VisibilityAccounts
+import com.murray.network.Resource
 import com.murray.repositories.UserSignInRepository
 import kotlinx.coroutines.launch
 import java.util.Locale
@@ -37,14 +38,22 @@ class SignUpViewModel : ViewModel() {
                 //1 añadimos el usuario al repositorio con corrutina
                 //corrutina
                 viewModelScope.launch {
-                    val userSignUp = UserSignUp()
-                    val result = UserSignInRepository.register()
+                    val userSignUp = UserSignUp(
+                        password.value!!,
+                        typeAccount.value!!,
+                        visibilityAccount.value!!,
+                        "Name",
+                        "Surname",
+                        email.value!!
+                    )
+                    val result = UserSignInRepository.register(userSignUp)
 
-
+                    when(result){
+                        is Resource.Error -> state.value = SignUpState.EmailDuplicatedError
+                        is Resource.Success<*> -> state.value = SignUpState.Success(userSignUp)
+                    }
                 }
 
-
-                state.value = SignUpState.Success
             }
         }
 
