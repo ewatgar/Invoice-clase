@@ -6,6 +6,12 @@ import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.murray.entities.accounts.TypeAccounts
+import com.murray.entities.accounts.UserSignUp
+import com.murray.entities.accounts.VisibilityAccounts
+import com.murray.repositories.UserSignInRepository
+import kotlinx.coroutines.launch
 import java.util.Locale
 
 class SignUpViewModel : ViewModel() {
@@ -13,6 +19,10 @@ class SignUpViewModel : ViewModel() {
     var email = MutableLiveData<String>()
     var password = MutableLiveData<String>()
     var password2 = MutableLiveData<String>()
+    var typeAccount = MutableLiveData<TypeAccounts>()
+    var visibilityAccount = MutableLiveData<VisibilityAccounts>()
+
+    var userSignUp = MutableLiveData<UserSignUp>()
 
     var state = MutableLiveData<SignUpState>()
 
@@ -22,8 +32,24 @@ class SignUpViewModel : ViewModel() {
             TextUtils.isEmpty(email.value) -> state.value = SignUpState.EmailEmptyError
             TextUtils.isEmpty(password.value) -> state.value = SignUpState.PasswordEmptyError
             TextUtils.isEmpty(password2.value) -> state.value = SignUpState.PasswordEmptyError2
-            !isEqualPasswords(password.value!!, password2.value!!) -> state.value = SignUpState.PasswordsNotEquals
-            else -> state.value = SignUpState.Success
+            !isEqualPasswords(password.value!!, password2.value!!) -> state.value =
+                SignUpState.PasswordsNotEquals
+
+            else -> {
+                //1 añadimos el usuario al repositorio con corrutina
+                UserSignInRepository.addUserSignUp(UserSignUp(email,))
+                //corrutina
+                viewModelScope.launch {
+                    //verificar si email está duplicado
+
+                    UserSignInRepository.register()
+
+
+                }
+
+
+                state.value = SignUpState.Success
+            }
         }
 
     }

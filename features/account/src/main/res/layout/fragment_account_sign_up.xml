@@ -40,7 +40,7 @@
                 android:id="@+id/tilEmailSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewmodel.email}"
+                android:text="@={viewmodel.userSignUp.email}"
                 android:hint="E-mail" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -56,7 +56,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tilPasswordSignUp"
-                android:text="@={viewmodel.password}"
+                android:text="@={viewmodel.userSignUp.password}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Contraseña" />
@@ -81,17 +81,16 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
-            android:id="@+id/spType"
+            android:id="@+id/spVisibility"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:entries="@array/typeuser_signup"
             app:layout_constraintBottom_toBottomOf="@+id/tvType"
             app:layout_constraintEnd_toStartOf="@+id/gdEnd"
             app:layout_constraintStart_toEndOf="@+id/tvType"
             app:layout_constraintTop_toTopOf="@+id/tvType" />
 
         <Spinner
-            android:id="@+id/spProfile"
+            android:id="@+id/spType"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/tvProfile"
@@ -137,7 +136,7 @@
             app:layout_constraintEnd_toStartOf="@+id/gdEnd"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="@+id/gdStart"
-            app:layout_constraintTop_toBottomOf="@+id/spProfile" />
+            app:layout_constraintTop_toBottomOf="@+id/spType" />
 
         <TextView
             android:id="@+id/txCalificacion"

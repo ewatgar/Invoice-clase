@@ -18,13 +18,19 @@ import com.murray.account.R
 import com.murray.account.databinding.FragmentAccountSignUpBinding
 import com.murray.account.ui.signup.usecase.SignUpState
 import com.murray.account.ui.signup.usecase.SignUpViewModel
+import com.murray.entities.accounts.TypeAccounts
+import com.murray.entities.accounts.TypeAccounts.Companion.getTypeAccountsList
+import com.murray.entities.accounts.UserSignUp
+import com.murray.entities.accounts.VisibilityAccounts
+import com.murray.entities.accounts.VisibilityAccounts.Companion.getVisibilityAccountsList
+import java.lang.reflect.Type
 
 
 class AccountSignUpFragment : Fragment() {
 
     private var _binding: FragmentAccountSignUpBinding? = null
 
-    private val viewModel: SignUpViewModel by viewModels()
+    private val viewmodel: SignUpViewModel by viewModels()
     private val binding get() = _binding!!
 
     private lateinit var twatcher: LogInTextWatcher
@@ -38,9 +44,9 @@ class AccountSignUpFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAccountSignUpBinding.inflate(inflater, container,false)
+        _binding = FragmentAccountSignUpBinding.inflate(inflater, container, false)
 
-        binding.viewmodel = this.viewModel
+        binding.viewmodel = this.viewmodel
 
 
         binding.lifecycleOwner = this
@@ -50,13 +56,41 @@ class AccountSignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val itemList = arrayListOf("Privado", "Publico", "Vacío")
+        initSpinnerTypeAccounts()
+        initSpinnerVisibilityAccounts()
 
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, itemList)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        twatcher = LogInTextWatcher(binding.tieEmailSignUp)
+        binding.tilEmailSignUp.addTextChangedListener(twatcher)
+
+        twatcher = LogInTextWatcher(binding.tiePasswordSignUp)
+        binding.tilPasswordSignUp.addTextChangedListener(twatcher)
+
+        twatcher = LogInTextWatcher(binding.tieConfirmsPasswordsSignUp)
+        binding.tilConfirmsPasswordsSignUp.addTextChangedListener(twatcher)
+
+        viewmodel.getState().observe(viewLifecycleOwner, Observer {
+            when (it) {
+                SignUpState.EmailEmptyError -> setEmailEmptyError()
+                SignUpState.PasswordEmptyError -> setPasswordEmptyError()
+                SignUpState.PasswordEmptyError2 -> setPasswordEmptyError2()
+                SignUpState.PasswordsNotEquals -> setDifferentPasswordError()
+                //SignUpState.Completed -> {}
+                else -> onSuccess()
+            }
+        })
+    }
 
 
-        val listener = object : AdapterView.OnItemSelectedListener{
+    private fun initSpinnerTypeAccounts() {
+        val typeAccountsList = getTypeAccountsList()
+        val typeAccountsAdapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, typeAccountsList)
+        typeAccountsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        binding.spType.adapter = typeAccountsAdapter
+
+        /*
+        val listener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -64,42 +98,31 @@ class AccountSignUpFragment : Fragment() {
                 id: Long
             ) {
                 val profile = parent?.adapter?.getItem(position)
-                Toast.makeText(requireActivity(), "Elemento pulsado $profile", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Elemento pulsado $profile", Toast.LENGTH_SHORT)
+                    .show()
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
-
         }
         with(binding.spProfile) {
             this.adapter = adapter
             onItemSelectedListener = listener
-        }
-
-
-
-        twatcher= LogInTextWatcher(binding.tieEmailSignUp)
-        binding.tilEmailSignUp.addTextChangedListener(twatcher)
-
-        twatcher= LogInTextWatcher(binding.tiePasswordSignUp)
-        binding.tilPasswordSignUp.addTextChangedListener(twatcher)
-
-        twatcher= LogInTextWatcher(binding.tieConfirmsPasswordsSignUp)
-        binding.tilConfirmsPasswordsSignUp.addTextChangedListener(twatcher)
-
-        viewModel.getState().observe(viewLifecycleOwner, Observer {
-            when(it){
-                SignUpState.EmailEmptyError -> setEmailEmptyError()
-                SignUpState.PasswordEmptyError -> setPasswordEmptyError()
-                SignUpState.PasswordEmptyError2 -> setPasswordEmptyError2()
-                SignUpState.PasswordsNotEquals -> setDifferentPasswordError()
-                SignUpState.Completed -> {}
-                else -> onSuccess()
-            }
-        })
+        }*/
     }
 
+    private fun initSpinnerVisibilityAccounts() {
+        val visibilityAccountsList = getVisibilityAccountsList()
+        val visibilityAccountsAdapter =
+            ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                visibilityAccountsList
+            )
+        visibilityAccountsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        binding.spVisibility.adapter = visibilityAccountsAdapter
+    }
 
     private fun setEmailEmptyError() {
         binding.tieEmailSignUp.error = getString(com.murray.account.R.string.errEmailEmpty)
@@ -112,7 +135,8 @@ class AccountSignUpFragment : Fragment() {
     }
 
     private fun setPasswordEmptyError2() {
-        binding.tieConfirmsPasswordsSignUp.error = getString(com.murray.account.R.string.errPasswordEmpty)
+        binding.tieConfirmsPasswordsSignUp.error =
+            getString(com.murray.account.R.string.errPasswordEmpty)
         binding.tieConfirmsPasswordsSignUp.requestFocus()
     }
 
@@ -122,11 +146,30 @@ class AccountSignUpFragment : Fragment() {
     }
 
     private fun onSuccess() {
-        viewModel.state.value = SignUpState.Completed
         Toast.makeText(requireActivity(), "Te has registrado", Toast.LENGTH_SHORT).show()
+        with(binding) {
+            val email: String = viewmodel!!.email.value!!
+            val password: String = viewmodel!!.password.value!!
+            val typeAccount: TypeAccounts = spType.selectedItem as TypeAccounts
+            val visibilityAccount: VisibilityAccounts =
+                spVisibility.selectedItem as VisibilityAccounts
+
+            /*
+            viewmodel.addUserSignUp(
+                UserSignUp(
+                    password,
+                    typeAccount,
+                    visibilityAccount,
+                    "Name",
+                    "Surname",
+                    email
+                )
+            )*/
+        }
+        Toast.makeText(requireContext(), "Se ha registrado nueva cuenta", Toast.LENGTH_SHORT).show()
+
         findNavController().popBackStack()
     }
-
 
 
     override fun onDestroyView() {
