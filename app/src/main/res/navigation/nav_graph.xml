@@ -70,5 +70,19 @@
         app:graphPackage="${applicationId}.task"
         app:graphResName="nav_graph_task"
         app:moduleName="task"/>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.murray.invoice.ui.preferences.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.murray.invoice.ui.preferences.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
 
 </navigation>
