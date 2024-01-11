@@ -8,4 +8,6 @@
     <string name="key_ringtone">ringtone</string>
     <string name="title_ringtone">Tono de llamada</string>
     <string name="category_notification">Configuración notificaciones</string>
+    <string name="key_email">email</string>
+    <string name="key_password">password</string>
 </resources>

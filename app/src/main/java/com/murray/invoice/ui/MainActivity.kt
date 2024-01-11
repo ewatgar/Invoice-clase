@@ -1,4 +1,4 @@
-package com.murray.invoice
+package com.murray.invoice.ui
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -9,11 +9,11 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.murray.invoice.R
 import com.murray.invoice.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

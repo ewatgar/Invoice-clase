@@ -2,15 +2,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <EditTextPreference
-        android:defaultValue="Default value"
-        android:key="edit_text_preference_1"
-        android:selectAllOnFocus="true"
+        android:key="@string/key_email"
         android:singleLine="true"
-        android:title="Edit text preference" />
+        android:title="@string/pref_title_email" />
     <EditTextPreference
-        android:defaultValue="Default value"
-        android:key="edit_text_preference_2"
-        android:selectAllOnFocus="true"
+        android:key="@string/key_password"
         android:singleLine="true"
-        android:title="Edit text preference" />
+        android:title="@string/pref_title_password" />
 </PreferenceScreen>
