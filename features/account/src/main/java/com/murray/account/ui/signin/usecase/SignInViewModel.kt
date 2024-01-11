@@ -38,11 +38,11 @@ class SignInViewModel : ViewModel() {
                     when (result) {
 
                         is Resource.Success<*> -> {
-                            val account = result.data as Account
+                            val account = result.data as? Account
                             Log.e(TAG, "Login correcto del usuario")
-                            state.value = SignInState.Success(result.data as? Account)
+                            state.value = SignInState.Success(account)
                             Locator.userPreferencesRepository.saveUser(email.value!!,
-                                password.value!!,account.id)
+                                password.value!!,account!!.id)
                         }
                         is Resource.Error -> {
                             Log.i(TAG, "Informacion del dato ${result.exception.message}")
