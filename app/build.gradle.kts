@@ -82,11 +82,11 @@ dependencies {
     // Declare the dependency for the Firebase Authentication library
     implementation ("com.google.firebase:firebase-auth-ktx")
     implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
-
     implementation("com.google.firebase:firebase-analytics")
-
     //lottie
     implementation ("com.airbnb.android:lottie:3.4.0")
+    // Preferences DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
 
 }

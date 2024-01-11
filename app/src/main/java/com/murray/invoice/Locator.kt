@@ -1,0 +1,22 @@
+package com.murray.invoice
+
+import android.app.Application
+import android.content.Context
+import androidx.datastore.preferences.preferencesDataStore
+import com.murray.invoice.data.preferences.UserPreferencesRepository
+
+object Locator {
+    private var application:Application? = null
+    //inline -> se inicializa al llamarse el getter
+    private inline val requireApplication get() = application ?: error("Mssing call:  initWith(application)")
+
+    fun initWith(application: Application){
+        this.application = application
+    }
+
+    private val Context.userStore by preferencesDataStore(name="user_preferences")
+
+    val userPreferencesRepository by lazy{
+        UserPreferencesRepository(requireApplication.userStore)
+    }
+}
