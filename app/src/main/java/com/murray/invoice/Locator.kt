@@ -7,7 +7,7 @@ import com.murray.invoice.data.preferences.UserPreferencesRepository
 
 object Locator {
     private var application:Application? = null
-    //inline -> se inicializa al llamarse el getter
+    //inline -> variable se inicializa cuando se llama el getter
     private inline val requireApplication get() = application ?: error("Mssing call:  initWith(application)")
 
     fun initWith(application: Application){
