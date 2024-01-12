@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="summary_account">Información de la cuenta del usuario</string>
-    <string name="key_account">Account</string>
+    <string name="key_account">account</string>
     <string name="title_account_setting">Cuenta del usuario</string>
     <string name="key_active_notifications">activar_notificaciones</string>
     <string name="title_active_notifications">Activar notificaciones</string>

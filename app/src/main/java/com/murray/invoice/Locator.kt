@@ -3,6 +3,7 @@ package com.murray.invoice
 import android.app.Application
 import android.content.Context
 import androidx.datastore.preferences.preferencesDataStore
+import com.murray.invoice.data.preferences.DataStorePreferencesRepository
 import com.murray.invoice.data.preferences.UserPreferencesRepository
 
 object Locator {
@@ -14,10 +15,16 @@ object Locator {
         this.application = application
     }
 
-    private val Context.userStore by preferencesDataStore(name="user_preferences")
+    private val Context.userStore by preferencesDataStore(name="user") //se añadirá la palabra "preferences" al final automáticamente
+    private val Context.settingStore by preferencesDataStore(name="settings") //se añadirá la palabra "preferences" al final automáticamente
 
-    //TODO: ???
+    //lazy es igual que lateinit (inicialización tardía)
     val userPreferencesRepository by lazy{
         UserPreferencesRepository(requireApplication.userStore)
     }
+
+    val settingsPreferencesRepository by lazy {
+        DataStorePreferencesRepository(requireApplication.settingStore)
+    }
+
 }

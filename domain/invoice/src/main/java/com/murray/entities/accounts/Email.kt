@@ -15,4 +15,8 @@ class Email(val value: String) {
         if (!pattern.matcher(value).matches())
             throw AccountException.InvalidEmailFormat()
     }
+
+    override fun toString(): String {
+        return value
+    }
 }

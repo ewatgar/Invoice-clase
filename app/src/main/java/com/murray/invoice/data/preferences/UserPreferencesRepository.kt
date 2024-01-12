@@ -17,11 +17,13 @@ class UserPreferencesRepository(private val dataStore: DataStore<Preferences>) {
     /**
      * Método para guardar los user_preferences
      */
-    suspend fun saveUser(email: String, password: String, id: Int) {
-        dataStore.edit { preferences ->
-            preferences[EMAIL] = email ?: "none"
-            preferences[PASSWORD] = password ?: "none"
-            preferences[ID] = id ?: 0
+     fun saveUser(email: String, password: String, id: Int) {
+        runBlocking {
+            dataStore.edit { preferences ->
+                preferences[EMAIL] = email ?: "none"
+                preferences[PASSWORD] = password ?: "none"
+                preferences[ID] = id ?: 0
+            }
         }
     }
 
