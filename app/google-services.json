@@ -1,13 +1,32 @@
 {
   "project_info": {
-    "project_number": "882147175354",
-    "project_id": "invoice-main",
-    "storage_bucket": "invoice-main.appspot.com"
+    "project_number": "883538609033",
+    "project_id": "invoice-97d2c",
+    "storage_bucket": "invoice-97d2c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:882147175354:android:401cfc5ab529ceb75ecb83",
+        "mobilesdk_app_id": "1:883538609033:android:c8ded3b91d54d99a0fd758",
+        "android_client_info": {
+          "package_name": "com.example.loginaplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCu0yBRIEfW3kwEcN66kKmt72iYviZ8Mg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883538609033:android:eb1c6c380b714ec70fd758",
         "android_client_info": {
           "package_name": "com.murray.invoice"
         }
@@ -15,7 +34,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBS6wR9-eR45tVSB2JlWUtT5l5x7Mw46gI"
+          "current_key": "AIzaSyCCu0yBRIEfW3kwEcN66kKmt72iYviZ8Mg"
         }
       ],
       "services": {
