@@ -1,5 +1,6 @@
 package com.murray.invoice.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,7 +22,6 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -29,7 +29,6 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.btSignin.setOnClickListener {
             //findNavController().navigate()
             findNavController().navigate(R.id.action_mainFragment_to_nav_graph_account)

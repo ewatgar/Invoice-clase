@@ -14,6 +14,8 @@ class AccountFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.account_preferences, rootKey)
         initPreferencesEmail()
         initPreferencesPassword()
+        val store = Locator.settingsPreferencesRepository
+        preferenceManager.preferenceDataStore = store
     }
 
     private fun initPreferencesEmail() {
